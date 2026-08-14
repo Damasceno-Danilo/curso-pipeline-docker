@@ -12,8 +12,8 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        go_version: ['>=1.18']
-        os: ['ubuntu-latest']
+        go_version: ['1.18', '1.17', '>=1.18']
+        os: ['ubuntu-latest', 'ubuntu-22.04']
     steps:
     - uses: actions/checkout@v3
 
@@ -26,11 +26,7 @@ jobs:
       run: docker compose build
 
     - name: Create-DB
-      run: |
-        docker compose up -d || true
-        sleep 3
-        docker compose logs postgres
-        docker compose ps -a
+      run: docker compose up -d --wait
 
     - name: Test
       run: go test -v main_test.go
