@@ -21,4 +21,4 @@ jobs:
    
     username: danilodamasceno
 
-    password: 
+    password: ${{secrets.PASSWORD_DOCKER_HUB}}
