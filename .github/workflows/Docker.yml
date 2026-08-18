@@ -19,3 +19,13 @@ jobs:
 
     - name: Push da imagem para o Docker Hub
       run: docker push danilodamasceno/curso-pipeline-docker:latest
+      
+    - name: Build and push Docker images
+      uses: docker/build-push-action@v7.3.0
+      with:
+        context: 
+        file: ./Dockerfile
+        push: true
+        tags: danilodamasceno/go_ci:${{github.ref_name}}
+    
+     
